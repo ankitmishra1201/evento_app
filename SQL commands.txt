@@ -1,0 +1,186 @@
+Creating tables:
+
+CREATE TABLE banking(
+b_id int,
+name varchar(50),
+accnum int,
+ifsc varchar(30),
+upi varchar(30),
+PRIMARY KEY (b_id));
+
+CREATE TABLE profiles(
+username varchar(30),
+password varchar(15),
+fname varchar(30),
+lname varchar(30),
+age int,
+minor int,
+email varchar(30),
+pnum int,
+gender varchar(30),
+address varchar(100),
+b_id int,
+PRIMARY KEY (username),
+FOREIGN KEY (b_id) references banking);
+
+CREATE TABLE organisations(
+username varchar(30),
+password varchar(15),
+cname varchar(30),
+email varchar(30),
+pnum int,
+verified int,
+b_id int,
+PRIMARY KEY (username),
+FOREIGN KEY (b_id) references banking);
+
+CREATE TABLE events(
+id int,
+name varchar(50),
+date_time date,
+fin int,
+venue varchar(100),
+price int,
+minor int,
+description varchar(250),
+o_username varchar(30),
+PRIMARY KEY (id),
+FOREIGN KEY (o_username) references organisations(username));
+
+CREATE TABLE logistics(
+username varchar(30),
+password varchar(15),
+cname varchar(30),
+email varchar(30),
+pnum int,
+ctype varchar(30),
+verified int,
+b_id int,
+PRIMARY KEY (username),
+FOREIGN KEY (b_id) references banking(b_id));
+
+CREATE TABLE requirements(
+id int,
+catering int,
+special int,
+music int,
+e_id int,
+PRIMARY KEY (id),
+FOREIGN KEY (e_id) references events(id));
+
+CREATE TABLE transactions(
+id int,
+pmode varchar(50),
+amount int,
+PRIMARY KEY (id));
+
+CREATE TABLE registrations(
+p_username varchar(30),
+e_id int,
+t_id int,
+PRIMARY KEY (p_username, e_id, t_id),
+FOREIGN KEY (p_username) references profiles(username),
+FOREIGN KEY (e_id) references events(id),
+FOREIGN KEY (t_id) references transactions(id));
+
+CREATE TABLE logistic_event(
+l_username varchar(30),
+e_id int,
+PRIMARY KEY (l_username, e_id),
+FOREIGN KEY (l_username) references logistics(username),
+FOREIGN KEY (e_id) references events(id));
+
+Inserting procedures:
+
+CREATE PROCEDURE insertBanking(b_id int, name varchar(50), accnum int, ifsc varchar(30), upi varchar(30))
+BEGIN
+INSERT INTO banking VALUES(b_id, name, accnum, ifsc, upi);
+END;
+//
+
+CREATE PROCEDURE insertProfiles(username varchar(30), password varchar(15), fname varchar(30), lname varchar(30), age int, email varchar(30), pnum int, gender varchar(30), address varchar(100), b_id int)
+BEGIN
+IF(age>=18) THEN
+INSERT INTO profiles VALUES(username, password, fname, lname, age, 0, email, pnum, gender, address, b_id);
+ELSE
+INSERT INTO profiles VALUES(username, password, fname, lname, age, 1, email, pnum, gender, address, b_id);
+END IF;
+END;
+//
+
+CREATE PROCEDURE insertOrganisations(username varchar(30), password varchar(15), cname varchar(30), email varchar(30), pnum int, verified int, b_id int)
+BEGIN
+INSERT INTO organisations VALUES(username, password, cname, email, pnum, 0, b_id);
+END;
+//
+
+CREATE PROCEDURE insertEvents(id int, name varchar(50), date_time date, fin int, venue varchar(100), price int, minor int, description varchar(250), o_username varchar(30))
+BEGIN
+INSERT INTO events VALUES(id, name, date_time, fin, venue, price, minor, description, o_username);
+END;
+//
+
+CREATE PROCEDURE insertLogistics(username varchar(30), password varchar(15), cname varchar(30), email varchar(30), pnum int, ctype varchar(30), verified int, b_id int)
+BEGIN
+INSERT INTO logistics VALUES(username, password, cname, email, pnum, ctype, verified, b_id);
+END;
+//
+
+CREATE PROCEDURE insertRequirements(id int, catering int, special int, music int, e_id int)
+BEGIN
+INSERT INTO requirements VALUES(id, catering, special, music, e_id);
+END;
+//
+
+CREATE PROCEDURE insertTransactions(id int, pmode varchar(50), amount int)
+BEGIN
+INSERT INTO transactions VALUES(id, pmode, amount);
+END;
+//
+
+CREATE PROCEDURE insertRegistrations(p_username varchar(30), e_id int, t_id int)
+BEGIN
+INSERT INTO transactions VALUES(id, pmode, amount);
+END;
+//
+
+CREATE PROCEDURE insertLogistic_event(l_username varchar(30), e_id int)
+BEGIN
+INSERT INTO transactions VALUES(l_username, e_id);
+END;
+//
+
+CREATE PROCEDURE insertPerformer_event(e_id int, p_username varchar(30))
+BEGIN
+INSERT INTO transactions VALUES(e_id, p_username);
+END;
+//
+
+
+Website admin procedures:
+
+CREATE PROCEDURE verification(username varchar(30))
+BEGIN
+IF(choice='organisations') THEN
+UPDATE organisations SET verified = 1 where username = userID;
+ELSEIF(choice='logistics') THEN
+UPDATE logistics SET verified = 1 where username = userID;
+END IF;
+END;
+//
+
+Insertion trigger:
+
+CREATE TRIGGER checkAge
+BEFORE INSERT ON profiles
+FOR EACH ROW
+BEGIN
+IF INSERTING OR UPDATING THEN
+IF(new.age<10) THEN
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Age is lower than 10, profile cannot be created.';
+END IF;
+END IF;
+END;
+//
+
+Routes, functionalities, insert data, create PL/SQL commands according to what we want to achieve.
