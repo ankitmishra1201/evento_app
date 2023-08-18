@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dbms_mp/EventInfo/EventGridtoLogistics.dart';
+import 'package:dbms_mp/Login&Signup/privacy_policy.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,7 @@ class SignUpbyLogistic extends StatefulWidget {
 class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
   @override
   Widget build(BuildContext context) {
+    var _tandc=false;
     TextEditingController username=TextEditingController();
     TextEditingController password=TextEditingController();
     TextEditingController email=TextEditingController();
@@ -32,7 +35,7 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
           "email":email.text.toString(),
           "pnum":phoneno.text,
           "verified":0,
-          "b_id":123456,
+          "b_id":1,
           "ctype":type.text.toString(),
 
       });
@@ -46,24 +49,72 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
 
     }
     return Scaffold(
-        backgroundColor: Colors.purple,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Theme.of(context).backgroundColor,
+          leading: IconButton(
+            icon: Icon(Icons.turn_left,size: 30,),
+            onPressed:()=> Navigator.of(context).pop(),
+          ),
+        ),
+        backgroundColor: Theme.of(context).backgroundColor,
         body:SafeArea(
           child: SingleChildScrollView(
 
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(18),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        decoration:BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+
+                        ) ,
+
+                        height: 20,
+                        width: MediaQuery.of(context).size.width/2.4,
+                      ),
+
+                      Container(
+                        height: 20,
+                        width: MediaQuery.of(context).size.width/2.4,
+                        decoration:BoxDecoration(
+                          color: Colors.grey[900],
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
+                          //color: Colors.grey[900],
+                        ),
+                      ),
+
+                    ],),
                   SizedBox(height: MediaQuery
                       .of(context)
                       .size
-                      .height * 0.05,),
-                  Text("EVENTO",
+                      .height * 0.03,),
+                  AutoSizeText("Please Fill up the Details.....",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 45,
-                    )
-                    ,),
+                      //fontWeight: FontWeight.w400,
+
+                    ),
+                    textAlign: TextAlign.left,
+                    minFontSize: 30,
+                    maxFontSize: 40,
+                    maxLines: 1,
+
+                    ),
                   SizedBox(height: MediaQuery
                       .of(context)
                       .size
@@ -74,21 +125,21 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
                     keyboardType: TextInputType.name,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       labelText: "Username",
                       alignLabelWithHint: true,
-                      labelStyle: const TextStyle(fontSize: 24, color: Colors.blueGrey,fontWeight: FontWeight.w600),
+                      labelStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey,fontWeight: FontWeight.w600),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
 
                     ),
@@ -103,21 +154,21 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
                     obscureText: true,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       labelText: "Password",
                       alignLabelWithHint: true,
-                      labelStyle: const TextStyle(fontSize: 24, color: Colors.blueGrey,fontWeight: FontWeight.w600),
+                      labelStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey,fontWeight: FontWeight.w600),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
 
                     ),
@@ -131,21 +182,21 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       labelText: "Company Email",
                       alignLabelWithHint: true,
-                      labelStyle: const TextStyle(fontSize: 24, color: Colors.blueGrey,fontWeight: FontWeight.w600),
+                      labelStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey,fontWeight: FontWeight.w600),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
 
                     ),
@@ -159,21 +210,21 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
                     keyboardType: TextInputType.phone,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       labelText: "Company Phone number",
                       alignLabelWithHint: true,
-                      labelStyle: const TextStyle(fontSize: 24, color: Colors.blueGrey,fontWeight: FontWeight.w600),
+                      labelStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey,fontWeight: FontWeight.w600),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
 
                     ),
@@ -187,21 +238,21 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
                     keyboardType: TextInputType.name,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       labelText: "Company Type",
                       alignLabelWithHint: true,
-                      labelStyle: const TextStyle(fontSize: 24, color: Colors.blueGrey,fontWeight: FontWeight.w600),
+                      labelStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey,fontWeight: FontWeight.w600),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
 
                     ),
@@ -218,21 +269,21 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
 
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       labelText: "Company name",
                       alignLabelWithHint: true,
-                      labelStyle: const TextStyle(fontSize: 24, color: Colors.blueGrey,fontWeight: FontWeight.w600),
+                      labelStyle: const TextStyle(fontSize: 16, color: Colors.blueGrey,fontWeight: FontWeight.w600),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Colors.blueGrey, width: 3),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
 
                     ),
@@ -241,28 +292,70 @@ class _SignUpbyLogisticState extends State<SignUpbyLogistic> {
                       .of(context)
                       .size
                       .height * 0.03,),
-                  InkWell(
-                    onTap: ()=>postuserdata(),
-                    child: Container(
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.07,
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width * 0.8,
+                  Row(
 
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(30),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Checkbox(
+
+                        checkColor: Colors.grey[900],
+                          activeColor: Colors.blue,
+                          tristate: false,
+                          value: _tandc,
+                          onChanged: (bool ?value){
+                            setState(() {
+                              _tandc=value!;
+                              print(value);
+                              print(_tandc);
+                            });
+                          }
                       ),
-                      child: Center(
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
+                      Text("I Accept the following ",style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),),
+                      InkWell(
+                        onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PrivacyPolicy())),
+                        child: Text("Terms & Condition!",style: TextStyle(
+                          color: Colors.lightBlueAccent,
+                          fontSize: 12,
+                        ),),
+                      )
+
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+                  Center(
+                    child: InkWell(
+                      onTap: ()=>postuserdata(),
+                      child: Container(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.07,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.8,
+
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Sign Up ",
+                                style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontSize: 25,
+                                ),
+                              ),
+                              Icon(Icons.chevron_right,size: 30,color: Colors.white,),
+                            ],
                           ),
                         ),
                       ),

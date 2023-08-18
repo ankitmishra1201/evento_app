@@ -1,11 +1,12 @@
 const mysql = require('mysql');
 
-
+// /usr/local/mysql/bin/mysql -u root -p
 const connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'Ankit@1201',
-    database : 'test'
+    password : 'root123',
+    database : 'test',
+   
 });
 
 connection.connect(function(err) {
