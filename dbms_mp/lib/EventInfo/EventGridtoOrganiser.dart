@@ -126,7 +126,7 @@ class _EventGridtoOrganiserState extends State<EventGridtoOrganiser> {
                   ? Padding(
                       padding: const EdgeInsets.only(left: 8.0, bottom: 20.0),
                       child: AutoSizeText(
-                        "Hello " + "Tinku" + " !",
+                        "Hello " + "XYZ" + " !",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w800,

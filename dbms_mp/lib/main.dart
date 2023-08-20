@@ -1,17 +1,29 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dbms_mp/EventInfo/EventGridtoUser.dart';
 import 'package:dbms_mp/Login&Signup/loginentry.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:internet_connectivity_checker/internet_connectivity_checker.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

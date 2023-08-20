@@ -114,7 +114,7 @@ class _EventGridtoUserState extends State<EventGridtoUser> {
                 return index==0?
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0,bottom: 20.0),
-                  child: AutoSizeText("Hello "+"Tinku"+" !",
+                  child: AutoSizeText("Hello "+"XYZ"+" !",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
