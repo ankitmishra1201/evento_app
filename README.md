@@ -1,6 +1,6 @@
 # EVENTO APP
 
-### An Mobile Application for both Android and IOS which allows the Customers, Event Organisers and Event Logistics to interact each other inside the one platform .
+### A Mobile Application for both Android and IOS which allows the Customers, Event Organisers and Event Logistics to interact each other inside the one platform .
 
 #### THERE ARE THREE DIFFERENT MODULES INVOLVED OVER HERE
 <br>
